@@ -1,0 +1,83 @@
+version: '3.8'
+
+services:
+  my-pentest-gpt:
+    build: .
+    container_name: my-pentest-gpt
+    environment:
+      - PYTHONPATH=/app
+      - CUDA_VISIBLE_DEVICES=0
+    volumes:
+      # Монтируем директории для данных
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./prompts:/app/prompts
+      - ./output:/app/output
+    working_dir: /app
+    command: --help
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - pentest-network
+
+  # Сервис для LoRA обучения
+  lora-trainer:
+    build: .
+    container_name: lora-trainer
+    environment:
+      - PYTHONPATH=/app
+      - CUDA_VISIBLE_DEVICES=0
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    working_dir: /app
+    command: train --epochs 3 --batch-size 4
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      - pentest-network
+    profiles:
+      - training
+
+  # Веб-интерфейс (опционально)
+  web-ui:
+    build: .
+    container_name: pentest-web-ui
+    ports:
+      - "8080:8080"
+    environment:
+      - PYTHONPATH=/app
+      - WEB_UI=true
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./prompts:/app/prompts
+      - ./output:/app/output
+    working_dir: /app
+    command: python3 -m src.web_ui
+    depends_on:
+      - my-pentest-gpt
+    networks:
+      - pentest-network
+    profiles:
+      - web
+
+networks:
+  pentest-network:
+    driver: bridge
+
+volumes:
+  model-cache:
+    driver: local
+  data-cache:
+    driver: local 
