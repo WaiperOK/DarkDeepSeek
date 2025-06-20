@@ -19,7 +19,7 @@ from .config import MODEL_CONFIG, GENERATION_CONFIG, MODEL_PATH, OUTPUT_DIR
 logger = logging.getLogger(__name__)
 
 class DeepSeekGenerator:
-    """Генератор кода на базе DeepSeek-R1-8B"""
+    """English docstring"""
 
     def __init__(self, model_path: Optional[Path] = None, use_lora: bool = False):
         self.model_path = model_path or MODEL_PATH
@@ -28,17 +28,17 @@ class DeepSeekGenerator:
         self.tokenizer = None
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
 
-        logger.info(f"Инициализация генератора, устройство: {self.device}")
+        logger.info(f"Инициалofация генератора, устройство: {self.device}")
 
     def load_model(self) -> Tuple[AutoModelForCausalLM, AutoTokenizer]:
         """
-        Загружает модель и токенизатор
+        Загружает модель и токенofатор
 
         Returns:
-            Кортеж (модель, токенизатор)
+            Кортеж (модель, токенofатор)
         """
         try:
-            logger.info(f"Загрузка модели из: {self.model_path}")
+            logger.info(f"Загрузка модели of: {self.model_path}")
 
             quantization_config = BitsAndBytesConfig(
                 load_in_4bit=True,
@@ -162,7 +162,7 @@ class DeepSeekGenerator:
         return self.generate_code(full_prompt, **generation_kwargs)
 
     def cleanup(self):
-        """Очищает память от модели"""
+        """English docstring"""
         if self.model is not None:
             del self.model
             self.model = None
@@ -180,7 +180,7 @@ class DeepSeekGenerator:
 _generator_instance = None
 
 def get_generator(use_lora: bool = False) -> DeepSeekGenerator:
-    """Получает глобальный экземпляр генератора"""
+    """English docstring"""
     global _generator_instance
 
     if _generator_instance is None:
@@ -221,7 +221,7 @@ if __name__ == "__main__":
 
     try:
         result = generator.generate_with_system_prompt(test_system, test_user)
-        print("Результат генерации:")
+        print("Result генерации:")
         print(result)
     except Exception as e:
         print(f"Ошибка: {e}")

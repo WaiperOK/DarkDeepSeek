@@ -10,14 +10,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 class MarkdownFormatter:
-    """Форматтер для создания Markdown отчетов"""
+    """English docstring"""
 
     def __init__(self):
         self.logger = logging.getLogger(self.__class__.__name__)
 
     def format_exploit_report(self, code: str, task_type: str = "exploit",
                             reasoning: Optional[str] = None, metadata: Optional[Dict] = None) -> str:
-        """Форматирует отчет об эксплойте с автоматическим исправлением кода"""
+        """English docstring"""
 
         extracted_code = self._create_code_section(code)
 
@@ -38,32 +38,32 @@ class MarkdownFormatter:
 
         if reasoning:
             short_reasoning = self._shorten_reasoning(reasoning)
-            sections.append("## 🧠 Краткий анализ")
+            sections.append("
             sections.append(short_reasoning)
             sections.append("")
 
         non_code_content = self._remove_code_blocks(code)
         if non_code_content.strip():
-            sections.append("## 📝 Описание")
+            sections.append("## 📝 Description")
             sections.append(non_code_content.strip())
             sections.append("")
 
         if extracted_code:
-            sections.append("## 💻 Код")
+            sections.append("
             sections.append("```javascript")
             formatted_code = self._aggressive_code_formatting(extracted_code)
             sections.append(formatted_code)
             sections.append("```")
             sections.append("")
 
-        sections.append("## ⚠️ Предупреждение")
+        sections.append("
         sections.append("Данный код предназначен исключительно для образовательных целей и тестирования безопасности.")
         sections.append("Использование в злонамеренных целях запрещено.")
 
         return "\n".join(sections)
 
     def _shorten_reasoning(self, reasoning: str) -> str:
-        """Сокращает reasoning до 3-5 коротких строк"""
+        """English docstring"""
         if not reasoning:
             return ""
 
@@ -80,7 +80,7 @@ class MarkdownFormatter:
         return clean_reasoning
 
     def _fix_code_formatting(self, code: str) -> str:
-        """Базовое исправление форматирования кода"""
+        """English docstring"""
         if not code:
             return ""
 
@@ -94,7 +94,7 @@ class MarkdownFormatter:
         return code
 
     def _aggressive_code_formatting(self, code: str) -> str:
-        """АГРЕССИВНОЕ форматирование кода с принудительными отступами"""
+        """English docstring"""
 
         formatted = self._fix_code_formatting(code)
 
@@ -105,7 +105,7 @@ class MarkdownFormatter:
         return formatted
 
     def _force_html_formatting(self, code: str) -> str:
-        """ПРИНУДИТЕЛЬНО форматирует HTML теги"""
+        """English docstring"""
 
         html_patterns = [
             (r'<(\w+)([^>]*)>', r'<\1\2>\n'),
@@ -129,7 +129,7 @@ class MarkdownFormatter:
         return code
 
     def _force_js_formatting(self, code: str) -> str:
-        """ПРИНУДИТЕЛЬНО форматирует JavaScript"""
+        """English docstring"""
 
         js_patterns = [
             (r';\s*([a-zA-Z_$])', r';\n\1'),
@@ -173,10 +173,10 @@ class MarkdownFormatter:
         return '\n'.join(formatted_lines)
 
     def _create_header(self, task_type: str = "exploit", metadata: Optional[Dict[str, Any]] = None) -> str:
-        """Создает заголовок отчета"""
+        """English docstring"""
         task_names = {
             "exploit": "🚀 Генерация Эксплойта",
-            "analyze": "🔍 Анализ Уязвимости",
+            "analyze": "🔍 Аналof Уязвимости",
             "reverse": "🛠️ Реверс-Инжиниринг",
             "network": "🌐 Сетевая Безопасность",
             "web": "🌍 Веб-Безопасность"
@@ -193,8 +193,8 @@ class MarkdownFormatter:
         return header
 
     def _create_metadata_section(self, metadata: Dict[str, Any]) -> str:
-        """Создает секцию метаданных"""
-        section = "## 📊 Информация\n\n"
+        """English docstring"""
+        section = "
 
         info_items = []
         if metadata.get("model"):
@@ -210,9 +210,9 @@ class MarkdownFormatter:
         return section
 
     def _create_code_section(self, code: str) -> str:
-        """Создает секцию с кодом с улучшенным извлечением"""
+        """English docstring"""
         if not code.strip():
-            return "## 💻 Код\n\nКод не найден в ответе. Возможно, ответ содержит только текстовое описание."
+            return "
 
 
         extracted_code = None
@@ -280,19 +280,19 @@ class MarkdownFormatter:
             if potential_code:
                 extracted_code = '\n'.join(potential_code)
             else:
-                return "## 💻 Код\n\nКод не найден в ответе. Возможно, ответ содержит только текстовое описание."
+                return "
 
         extracted_code = extracted_code.strip()
 
         language = self._detect_language(extracted_code)
 
-        section = "## 💻 Код\n\n"
+        section = "
         section += f"```{language}\n{extracted_code}\n```\n"
 
         return section
 
     def _is_code_line(self, line: str) -> bool:
-        """Проверяет, похожа ли строка на код"""
+        """English docstring"""
         import re
 
         if len(line) < 3:
@@ -350,7 +350,7 @@ class MarkdownFormatter:
         return False
 
     def _extract_technical_content(self, text: str) -> str:
-        """Извлекает технический контент из текста"""
+        """English docstring"""
         import re
 
         patterns = [
@@ -375,7 +375,7 @@ class MarkdownFormatter:
         return '\n'.join(technical_content) if technical_content else ""
 
     def _detect_language(self, code: str) -> str:
-        """Определяет язык программирования по коду"""
+        """English docstring"""
         code_lower = code.lower()
 
         if any(keyword in code_lower for keyword in ['import ', 'def ', 'print(', 'if __name__']):
@@ -396,8 +396,8 @@ class MarkdownFormatter:
         return "text"
 
     def _create_reasoning_section(self, reasoning: str) -> str:
-        """Создает секцию с рассуждениями"""
-        section = "## 🧠 Анализ и Рассуждения\n\n"
+        """English docstring"""
+        section = "
 
         formatted_reasoning = self._format_reasoning_text(reasoning)
         section += formatted_reasoning
@@ -405,7 +405,7 @@ class MarkdownFormatter:
         return section
 
     def _format_reasoning_text(self, text: str) -> str:
-        """Форматирует текст рассуждений"""
+        """English docstring"""
         text = re.sub(r'\n\s*\n', '\n\n', text.strip())
 
         lines = text.split('\n')
@@ -432,7 +432,7 @@ def format_markdown(code: str,
 
     Args:
         code: Код для форматирования
-        task_type: Тип задачи
+        task_type: Type задачи
         reasoning: Рассуждения
         metadata: Метаданные
 
@@ -443,12 +443,12 @@ def format_markdown(code: str,
     return formatter.format_exploit_report(code, task_type, reasoning, metadata)
 
 def create_simple_code_block(code: str, language: str = "python") -> str:
-    """Создает простой блок кода"""
+    """English docstring"""
     return f"```{language}\n{code.strip()}\n```"
 
 def add_security_comment(code: str) -> str:
-    """Добавляет комментарий о мощности инструмента"""
-    comment = "# Мощный инструмент для кибербезопасности\n"
+    """English docstring"""
+    comment = "
     return comment + code
 
 if __name__ == "__main__":

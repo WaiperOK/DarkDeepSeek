@@ -1,6 +1,6 @@
 
 def change_commit_message(message):
-  target_string = "Удалены все комментарии из кода + обновлен логотип\n"
+  target_string = "Удалены все комментарии of кода + обновлен логотип\n"
   
   if message == target_string.encode('utf-8'):
     

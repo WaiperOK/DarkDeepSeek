@@ -10,12 +10,12 @@ import requests
 from pathlib import Path
 
 def print_step(message: str):
-    """Печатает шаг установки"""
+    """English docstring"""
     print(f"\n🔧 {message}")
     print("=" * 50)
 
 def run_command(command: str, check: bool = True) -> bool:
-    """Выполняет команду в shell"""
+    """English docstring"""
     try:
         result = subprocess.run(command, shell=True, check=check, capture_output=True, text=True)
         if result.stdout:
@@ -28,7 +28,7 @@ def run_command(command: str, check: bool = True) -> bool:
         return False
 
 def check_ollama_installed() -> bool:
-    """Проверяет установлена ли Ollama"""
+    """English docstring"""
     try:
         result = subprocess.run(["ollama", "--version"], capture_output=True, text=True)
         return result.returncode == 0
@@ -36,7 +36,7 @@ def check_ollama_installed() -> bool:
         return False
 
 def install_ollama():
-    """Устанавливает Ollama в зависимости от ОС"""
+    """English docstring"""
     system = platform.system().lower()
 
     if system == "linux":
@@ -64,7 +64,7 @@ def install_ollama():
         return False
 
 def start_ollama_service():
-    """Запускает сервис Ollama"""
+    """English docstring"""
     print("Запуск сервиса Ollama...")
 
     try:
@@ -102,7 +102,7 @@ def start_ollama_service():
         return True
 
 def pull_deepseek_model():
-    """Загружает модель DeepSeek-R1-8B"""
+    """English docstring"""
     print("Загрузка DeepSeek-R1-8B модели...")
     print("⚠️ Это может занять несколько минут (модель ~5GB)")
 
@@ -127,7 +127,7 @@ def pull_deepseek_model():
     return None
 
 def test_installation():
-    """Тестирует установку"""
+    """English docstring"""
     print("Тестирование установки...")
 
     try:
@@ -177,11 +177,11 @@ def test_installation():
         return False
 
 def setup_my_pentest_gpt():
-    """Настраивает my-pentest-gpt"""
+    """English docstring"""
     print("Настройка my-pentest-gpt...")
 
     if not Path("src").exists():
-        print("❌ Запустите скрипт из корневой директории проекта")
+        print("❌ Запустите скрипт of корневой директории проекта")
         return False
 
     print("Установка Python зависимостей...")
@@ -198,7 +198,7 @@ def setup_my_pentest_gpt():
     return True
 
 def main():
-    """Основная функция установки"""
+    """English docstring"""
     print("🛡️ Установка my-pentest-gpt с Ollama + DeepSeek-R1-8B")
     print("=" * 60)
 
@@ -243,19 +243,19 @@ def main():
 
     print("\n🚀 ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ:")
     print("-" * 30)
-    print("# Генерация SQL injection эксплойта:")
+    print("
     print("python -m src.cli_ollama generate generate_exploit --target 'SQL injection в форме входа'")
     print()
-    print("# Анализ уязвимости:")
+    print("
     print("python -m src.cli_ollama generate analyze_vulnerability --target 'XSS в комментариях'")
     print()
-    print("# Интерактивный чат:")
+    print("
     print("python -m src.cli_ollama chat")
     print()
-    print("# Список шаблонов:")
+    print("
     print("python -m src.cli_ollama list-templates")
     print()
-    print("# Список моделей:")
+    print("
     print("python -m src.cli_ollama list-models")
 
     print("\n📚 ДОКУМЕНТАЦИЯ:")

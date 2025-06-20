@@ -31,13 +31,13 @@ def mock_generate_code(system_prompt: str, user_prompt: str, **kwargs) -> str:
         return generate_xss_example()
     elif "сканирование" in user_prompt.lower() or "порт" in user_prompt.lower():
         return generate_port_scanner_example()
-    elif "анализ" in user_prompt.lower():
+    elif "аналof" in user_prompt.lower():
         return generate_code_analysis_example()
     else:
         return generate_generic_exploit_example()
 
 def generate_sql_injection_example() -> str:
-    """Пример кода для SQL инъекции"""
+    """English docstring"""
     return '''```python
 import requests
 import urllib.parse
@@ -90,7 +90,7 @@ if __name__ == "__main__":
 ```'''
 
 def generate_xss_example() -> str:
-    """Пример кода для XSS тестирования"""
+    """English docstring"""
     return '''```python
 import requests
 from urllib.parse import urlencode
@@ -142,7 +142,7 @@ if __name__ == "__main__":
 ```'''
 
 def generate_port_scanner_example() -> str:
-    """Пример кода для сканирования портов"""
+    """English docstring"""
     return '''```python
 import socket
 import threading
@@ -150,7 +150,7 @@ from concurrent.futures import ThreadPoolExecutor
 import argparse
 
 def scan_port(host, port, timeout=1):
-    """Сканирует один порт"""
+    """English docstring"""
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.settimeout(timeout)
@@ -164,7 +164,7 @@ def scan_port(host, port, timeout=1):
     return None
 
 def get_service_name(port):
-    """Определяет сервис по порту"""
+    """English docstring"""
     services = {
         21: "FTP", 22: "SSH", 23: "Telnet", 25: "SMTP",
         53: "DNS", 80: "HTTP", 110: "POP3", 143: "IMAP",
@@ -173,7 +173,7 @@ def get_service_name(port):
     return services.get(port, "Unknown")
 
 def port_scanner(host, start_port=1, end_port=1000, threads=100):
-    """Многопоточный сканер портов"""
+    """English docstring"""
     print(f"[*] Сканирование {host} портов {start_port}-{end_port}")
 
     open_ports = []
@@ -205,19 +205,19 @@ if __name__ == "__main__":
 ```'''
 
 def generate_code_analysis_example() -> str:
-    """Пример анализа кода на уязвимости"""
+    """English docstring"""
     return '''
 
 
-- **Описание**: Использование функции eval() с пользовательскими данными
-- **Риск**: Выполнение произвольного кода на сервере
+- **Description**: Использование функции eval() с пользовательскими данными
+- **Риск**: Выполнение проofвольного кода на сервере
 - **Решение**: Заменить на безопасные альтернативы
 
-- **Описание**: Прямая подстановка данных в SQL запрос
+- **Description**: Прямая подстановка данных в SQL запрос
 - **Риск**: Утечка данных, модификация БД
-- **Решение**: Использовать параметризованные запросы
+- **Решение**: Использовать параметрofованные запросы
 
-- **Описание**: Отсутствие экранирования при выводе
+- **Description**: Отсутствие экранирования при выводе
 - **Риск**: Выполнение скриптов в браузере пользователя
 - **Решение**: htmlspecialchars() для всех выводимых данных
 
@@ -236,7 +236,7 @@ echo htmlspecialchars($_POST['comment'], ENT_QUOTES, 'UTF-8');
 ```'''
 
 def generate_generic_exploit_example() -> str:
-    """Общий пример эксплойта"""
+    """English docstring"""
     return '''```python
 import requests
 import sys
@@ -254,7 +254,7 @@ class VulnerabilityTester:
         self.vulnerabilities = []
 
     def test_common_vulnerabilities(self):
-        """Тестирует общие уязвимости"""
+        """English docstring"""
 
         print("[*] Начинаем тестирование уязвимостей...")
 
@@ -267,7 +267,7 @@ class VulnerabilityTester:
         self.print_results()
 
     def check_server_info(self):
-        """Проверяет информацию о сервере"""
+        """English docstring"""
         try:
             response = self.session.get(self.target)
 
@@ -285,7 +285,7 @@ class VulnerabilityTester:
             print(f"[!] Ошибка при проверке сервера: {e}")
 
     def test_input_validation(self):
-        """Тестирует валидацию входных данных"""
+        """English docstring"""
 
         test_payloads = [
             "'; DROP TABLE test; --",
@@ -309,7 +309,7 @@ class VulnerabilityTester:
                 print(f"[!] Ошибка при тестировании payload: {e}")
 
     def check_security_headers(self):
-        """Проверяет заголовки безопасности"""
+        """English docstring"""
 
         try:
             response = self.session.get(self.target)
@@ -339,7 +339,7 @@ class VulnerabilityTester:
             print(f"[!] Ошибка при проверке заголовков: {e}")
 
     def print_results(self):
-        """Выводит результаты тестирования"""
+        """English docstring"""
 
         print(f"\n[*] Тестирование завершено")
         print(f"[*] Найдено уязвимостей: {len(self.vulnerabilities)}")
@@ -365,14 +365,14 @@ if __name__ == "__main__":
 
 @app.command()
 def generate(
-    task: str = typer.Argument(..., help="Тип задачи"),
+    task: str = typer.Argument(..., help="Type задачи"),
     prompt_set: str = typer.Option("default", "--prompt-set", "-p"),
     think: bool = typer.Option(True, "--think/--no-think"),
     output: Optional[Path] = typer.Option(None, "--output", "-o"),
     target: Optional[str] = typer.Option(None, "--target"),
     custom_prompt: Optional[str] = typer.Option(None, "--custom")
 ):
-    """🚀 Генерирует код для задач кибербезопасности (демо версия)"""
+    """English docstring"""
 
     print("🛡️ my-pentest-gpt - AI Генератор для Кибербезопасности (ДЕМО)")
     print("="*60)
@@ -427,7 +427,7 @@ def generate(
             output.parent.mkdir(parents=True, exist_ok=True)
             with open(output, 'w', encoding='utf-8') as f:
                 f.write(formatted_result)
-            print(f"\n✅ Результат сохранен в: {output}")
+            print(f"\n✅ Result сохранен в: {output}")
 
     except Exception as e:
         print(f"❌ Ошибка: {e}")
@@ -435,7 +435,7 @@ def generate(
 
 @app.command()
 def list_templates():
-    """📋 Показывает список доступных шаблонов"""
+    """English docstring"""
     from .prompt_manager import prompt_manager
 
     templates = prompt_manager.list_templates()
@@ -451,7 +451,7 @@ def list_templates():
 
 @app.command()
 def setup():
-    """⚙️ Настраивает рабочую среду"""
+    """English docstring"""
     print("🔧 Настройка my-pentest-gpt (демо версия)")
     print("="*50)
 
@@ -468,7 +468,7 @@ def setup():
         raise typer.Exit(1)
 
 def _detect_task_type(task: str) -> str:
-    """Определяет тип задачи"""
+    """English docstring"""
     if "analyze" in task.lower():
         return "analyze"
     elif "reverse" in task.lower():

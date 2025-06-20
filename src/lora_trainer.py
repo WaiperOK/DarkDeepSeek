@@ -1,6 +1,6 @@
 """
 Модуль LoRA-дообучения для my-pentest-gpt
-Обучает DeepSeek-R1-8B на специализированных данных
+Обучает DeepSeek-R1-8B на специалofированных данных
 """
 import os
 import torch
@@ -37,7 +37,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class LoRATrainer:
-    """Тренер для LoRA-дообучения DeepSeek-R1-8B"""
+    """English docstring"""
 
     def __init__(
         self,
@@ -52,7 +52,7 @@ class LoRATrainer:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
     def prepare_model(self) -> None:
-        """Подготавливает модель для обучения"""
+        """English docstring"""
         logger.info(f"Загрузка базовой модели: {self.base_model_path}")
 
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -95,7 +95,7 @@ class LoRATrainer:
         Returns:
             Подготовленный датасет
         """
-        logger.info(f"Загрузка датасета из: {data_path}")
+        logger.info(f"Загрузка датасета of: {data_path}")
 
         if not data_path.exists():
             raise FileNotFoundError(f"Файл данных не найден: {data_path}")
@@ -103,7 +103,7 @@ class LoRATrainer:
         dataset = load_dataset("json", data_files=str(data_path))["train"]
 
         def preprocess_function(examples):
-            """Предобрабатывает примеры для обучения"""
+            """English docstring"""
             texts = []
             for prompt, completion in zip(examples["prompt"], examples["completion"]):
                 text = f"{prompt}\n{completion}{self.tokenizer.eos_token}"
@@ -276,7 +276,7 @@ def test_sql_injection(url):
     return successful_payloads
 
 def advanced_sql_test(url, param_name='id'):
-    """Продвинутое тестирование SQL инъекции"""
+    """English docstring"""
 
     union_payloads = [
         f"1' UNION SELECT 1,version(),database(),user()--",

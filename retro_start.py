@@ -18,7 +18,7 @@ except ImportError:
     sys.exit(1)
 
 def retro_startup():
-    """Полный ретро-запуск с эффектами"""
+    """English docstring"""
     console = Console(width=80, color_system="256")
     effects = RetroEffects(console)
 

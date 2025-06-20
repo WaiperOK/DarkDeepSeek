@@ -1,3 +1,3 @@
-__version__ = "1.5"
+__version__ = "1.6"
 __author__ = "Cybersecurity Expert"
-__description__ = "AI-инструмент для кибербезопасности на базе DeepSeek-R1-8B"
+__description__ = "AI cybersecurity tool based on DeepSeek-R1-8B"

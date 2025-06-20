@@ -9,7 +9,7 @@ from rich.text import Text
 from rich.panel import Panel
 
 class RetroEffects:
-    """Коллекция ретро-эффектов"""
+    """English docstring"""
 
     def __init__(self, console: Console):
         self.console = console
@@ -18,7 +18,7 @@ class RetroEffects:
         self.cyan_color = "bright_cyan"
 
     def crt_flicker(self, duration: float = 2.0):
-        """Имитация мерцания CRT монитора"""
+        """English docstring"""
         end_time = time.time() + duration
 
         while time.time() < end_time:
@@ -34,7 +34,7 @@ class RetroEffects:
             time.sleep(random.uniform(0.1, 0.3))
 
     def boot_disk_check(self):
-        """Имитация проверки диска при загрузке"""
+        """English docstring"""
         self.console.print("Checking file system on C:", style=self.amber_color)
         self.console.print("The type of the file system is NTFS.", style=self.amber_color)
         self.console.print("Volume label is DARKDEEPSEEK.", style=self.amber_color)
@@ -58,7 +58,7 @@ class RetroEffects:
         self.console.print()
 
     def modem_connection(self):
-        """Имитация подключения через модем"""
+        """English docstring"""
         modem_sounds = [
             "ATDT1234567890",
             "CONNECT 56000",
@@ -82,7 +82,7 @@ class RetroEffects:
         self.console.print()
 
     def ascii_art_hacker(self):
-        """ASCII арт хакера"""
+        """English docstring"""
         hacker_art = """
                     .-""""""-.
                   .'          '.
@@ -105,7 +105,7 @@ class RetroEffects:
             time.sleep(0.1)
 
     def loading_bar_retro(self, text: str, duration: float = 3.0):
-        """Ретро загрузочная полоса"""
+        """English docstring"""
         self.console.print(f"{text}:", style=self.amber_color)
 
         bar_length = 50
@@ -123,7 +123,7 @@ class RetroEffects:
         self.console.print(" COMPLETE", style=self.primary_color)
 
     def terminal_login_sequence(self):
-        """Последовательность входа в систему"""
+        """English docstring"""
         self.console.print("DarkDeepSeek Security System v2.4", style=self.amber_color)
         self.console.print("Unauthorized access is prohibited", style="bright_red")
         self.console.print("All activities are monitored and logged", style="bright_red")
@@ -146,7 +146,7 @@ class RetroEffects:
         self.console.print()
 
     def matrix_rain(self, duration: float = 5.0):
-        """Эффект падающего кода как в Матрице"""
+        """English docstring"""
         matrix_chars = "0123456789ABCDEF!@#$%^&*()_+-=[]{}|;:,.<>?"
         columns = 80
         drops = [0] * columns
@@ -179,7 +179,7 @@ class RetroEffects:
             time.sleep(0.1)
 
     def old_computer_startup(self):
-        """Имитация запуска старого компьютера"""
+        """English docstring"""
         startup_messages = [
             "Phoenix BIOS 4.0 Release 6.0",
             "Copyright 1985-1995 Phoenix Technologies Ltd.",
@@ -208,7 +208,7 @@ class RetroEffects:
                 time.sleep(0.3)
 
     def glitch_effect(self, text: str):
-        """Эффект глитча для текста"""
+        """English docstring"""
         glitch_chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/~`"
 
         for _ in range(5):
@@ -225,7 +225,7 @@ class RetroEffects:
         self.console.print(f"\r{text}", style=self.primary_color)
 
     def cyber_banner(self):
-        """Кибер-баннер в стиле 90-х"""
+        """English docstring"""
         banner = """
     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
     █                                                                      █

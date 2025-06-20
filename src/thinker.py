@@ -5,11 +5,11 @@ import logging
 logger = logging.getLogger(__name__)
 
 class ThinkingEngine:
-    """Движок для пошагового рассуждения"""
+    """English docstring"""
 
     THINKING_PATTERNS = {
         "analyze": [
-            "Давайте проанализируем эту задачу пошагово:",
+            "Давайте проаналofируем эту задачу пошагово:",
             "1. Определим цель атаки",
             "2. Выявим потенциальные уязвимости",
             "3. Выберем подходящий метод эксплуатации",
@@ -17,7 +17,7 @@ class ThinkingEngine:
         ],
         "exploit": [
             "Пошаговый план создания эксплойта:",
-            "1. Анализ целевой системы",
+            "1. Аналof целевой системы",
             "2. Поиск векторов атаки",
             "3. Разработка payload'а",
             "4. Тестирование и валидация",
@@ -25,9 +25,9 @@ class ThinkingEngine:
         ],
         "reverse": [
             "Методология реверс-инжиниринга:",
-            "1. Статический анализ бинарника",
+            "1. Статический аналof бинарника",
             "2. Поиск точек входа",
-            "3. Анализ потока выполнения",
+            "3. Аналof потока выполнения",
             "4. Выявление критических функций",
             "5. Создание proof-of-concept"
         ]
@@ -42,7 +42,7 @@ class ThinkingEngine:
 
         Args:
             template: Исходный шаблон промпта
-            task_type: Тип задачи (analyze, exploit, reverse)
+            task_type: Type задачи (analyze, exploit, reverse)
             think: Включить ли режим рассуждения
 
         Returns:
@@ -61,13 +61,13 @@ class ThinkingEngine:
         return enhanced_template
 
     def _get_thinking_prompt(self, task_type: str) -> str:
-        """Получает шаблон рассуждения для типа задачи"""
+        """English docstring"""
         patterns = self.THINKING_PATTERNS.get(task_type, self.THINKING_PATTERNS["exploit"])
         return "\n".join(patterns)
 
     def extract_reasoning(self, generated_text: str) -> Tuple[str, Optional[str]]:
         """
-        Извлекает код и рассуждения из сгенерированного текста
+        Извлекает код и рассуждения of сгенерированного текста
 
         Args:
             generated_text: Сгенерированный текст с рассуждениями
@@ -101,7 +101,7 @@ class ThinkingEngine:
         return final_code, reasoning
 
     def _clean_reasoning(self, text: str) -> str:
-        """Очищает текст рассуждений от артефактов"""
+        """English docstring"""
         cleaned = re.sub(r'\n\s*\n', '\n\n', text.strip())
 
         cleaned = re.sub(r'^\s*[-*#]+\s*', '', cleaned, flags=re.MULTILINE)
@@ -115,7 +115,7 @@ def apply_think(template: str, think: bool = True, task_type: str = "exploit") -
     Args:
         template: Шаблон промпта
         think: Включить ли рассуждения
-        task_type: Тип задачи
+        task_type: Type задачи
 
     Returns:
         Модифицированный промпт

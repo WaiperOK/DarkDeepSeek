@@ -51,7 +51,7 @@ OLLAMA_CONFIG = {
 }
 
 def ensure_directories():
-    """Создает необходимые директории если они не существуют"""
+    """English docstring"""
     directories = [
         MODEL_PATH,
         PROMPTS_DIR,

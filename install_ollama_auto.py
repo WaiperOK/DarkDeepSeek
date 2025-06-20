@@ -11,7 +11,7 @@ import tempfile
 from pathlib import Path
 
 def get_system_info():
-    """Получение информации о системе"""
+    """English docstring"""
     system = platform.system().lower()
     arch = platform.machine().lower()
 
@@ -25,7 +25,7 @@ def get_system_info():
     return system, arch
 
 def check_ollama_installed():
-    """Проверка установки Ollama"""
+    """English docstring"""
     try:
         result = subprocess.run(['ollama', '--version'],
                               capture_output=True, text=True, timeout=10)
@@ -36,7 +36,7 @@ def check_ollama_installed():
     return False, None
 
 def install_ollama_windows():
-    """Установка Ollama для Windows"""
+    """English docstring"""
     print("🔧 Установка Ollama для Windows...")
 
     url = "https://ollama.ai/download/windows"
@@ -62,7 +62,7 @@ def install_ollama_windows():
         return False
 
 def install_ollama_linux():
-    """Установка Ollama для Linux"""
+    """English docstring"""
     print("🔧 Установка Ollama для Linux...")
 
     try:
@@ -81,7 +81,7 @@ def install_ollama_linux():
         return False
 
 def install_ollama_macos():
-    """Установка Ollama для macOS"""
+    """English docstring"""
     print("🔧 Установка Ollama для macOS...")
 
     try:
@@ -114,7 +114,7 @@ def install_ollama_macos():
         return False
 
 def start_ollama_service():
-    """Запуск сервиса Ollama"""
+    """English docstring"""
     print("🚀 Запуск Ollama...")
 
     system = platform.system().lower()
@@ -136,7 +136,7 @@ def start_ollama_service():
         return False
 
 def pull_deepseek_model():
-    """Загрузка модели DeepSeek"""
+    """English docstring"""
     print("📦 Загрузка модели deepseek-r1:8b...")
     print("⏳ Это может занять несколько минут (~5GB)...")
 
@@ -168,7 +168,7 @@ def pull_deepseek_model():
         return False
 
 def main():
-    """Главная функция установки"""
+    """English docstring"""
     print("🖥️  DarkDeepSeek - Автоустановщик Ollama")
     print("=" * 50)
 

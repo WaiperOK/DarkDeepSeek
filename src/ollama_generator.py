@@ -13,7 +13,7 @@ from .config import OLLAMA_CONFIG, GENERATION_CONFIG
 logger = logging.getLogger(__name__)
 
 class OllamaGenerator:
-    """Генератор кода через Ollama API"""
+    """English docstring"""
 
     def __init__(self,
                  base_url: str = "http://localhost:11434",
@@ -22,11 +22,11 @@ class OllamaGenerator:
         self.model_name = model_name
         self.session = requests.Session()
 
-        logger.info(f"Инициализация Ollama генератора: {self.base_url}")
+        logger.info(f"Инициалofация Ollama генератора: {self.base_url}")
         logger.info(f"Модель: {self.model_name}")
 
     def check_connection(self) -> bool:
-        """Проверяет подключение к Ollama"""
+        """English docstring"""
         try:
             response = self.session.get(f"{self.base_url}/api/tags")
             return response.status_code == 200
@@ -35,7 +35,7 @@ class OllamaGenerator:
             return False
 
     def list_models(self) -> List[Dict[str, Any]]:
-        """Возвращает список доступных моделей"""
+        """English docstring"""
         try:
             response = self.session.get(f"{self.base_url}/api/tags")
             if response.status_code == 200:
@@ -46,7 +46,7 @@ class OllamaGenerator:
             return []
 
     def pull_model(self, model_name: str = None) -> bool:
-        """Загружает модель в Ollama"""
+        """English docstring"""
         model = model_name or self.model_name
 
         try:
@@ -136,7 +136,7 @@ class OllamaGenerator:
             return ""
 
     def _clean_thinking_blocks(self, text: str) -> str:
-        """Убирает или сокращает блоки размышлений <think>...</think> из ответа"""
+        """English docstring"""
         import re
 
         def shorten_think_block(match):
@@ -157,7 +157,7 @@ class OllamaGenerator:
         return cleaned.strip()
 
     def _handle_stream_response(self, response) -> str:
-        """Обрабатывает потоковый ответ"""
+        """English docstring"""
         full_response = ""
 
         try:
@@ -226,7 +226,7 @@ class OllamaGenerator:
 _ollama_generator = None
 
 def get_ollama_generator(model_name: str = None) -> OllamaGenerator:
-    """Получает глобальный экземпляр Ollama генератора"""
+    """English docstring"""
     global _ollama_generator
 
     if _ollama_generator is None:
@@ -281,5 +281,5 @@ if __name__ == "__main__":
     else:
         generator = get_ollama_generator(args.model)
         result = generator.generate_code(args.prompt)
-        print("Результат:")
+        print("Result:")
         print(result)

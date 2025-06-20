@@ -1,6 +1,6 @@
 """
 Менеджер промптов для my-pentest-gpt
-Загружает и валидирует шаблоны из JSON файлов
+Загружает и валидирует шаблоны of JSON файлов
 """
 import json
 import logging
@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class PromptTemplate(BaseModel):
-    """Модель для валидации шаблона промпта"""
+    """English docstring"""
     name: str
     description: str
     system_prompt: str
@@ -29,7 +29,7 @@ class PromptTemplate(BaseModel):
         return v.strip()
 
 class PromptManager:
-    """Менеджер для работы с шаблонами промптов"""
+    """English docstring"""
 
     def __init__(self, prompts_dir: Path = PROMPTS_DIR):
         self.prompts_dir = prompts_dir
@@ -37,7 +37,7 @@ class PromptManager:
         self._load_all_templates()
 
     def _load_all_templates(self):
-        """Загружает все шаблоны из директории промптов"""
+        """English docstring"""
         if not self.prompts_dir.exists():
             logger.warning(f"Директория промптов не найдена: {self.prompts_dir}")
             return
@@ -105,7 +105,7 @@ class PromptManager:
         }
 
     def list_templates(self) -> list:
-        """Возвращает список всех доступных шаблонов"""
+        """English docstring"""
         return [
             {
                 "name": template.name,
@@ -115,7 +115,7 @@ class PromptManager:
         ]
 
     def reload_templates(self):
-        """Перезагружает все шаблоны"""
+        """English docstring"""
         self._templates_cache.clear()
         self._load_all_templates()
         logger.info("Шаблоны перезагружены")
@@ -123,7 +123,7 @@ class PromptManager:
 prompt_manager = PromptManager()
 
 def get_template(task_name: str, prompt_set: str = "default") -> Dict[str, Any]:
-    """Удобная функция для получения шаблона"""
+    """English docstring"""
     return prompt_manager.load_template(task_name, prompt_set)
 
 if __name__ == "__main__":
