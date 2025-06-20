@@ -627,28 +627,21 @@ def helper():
 def show_generation_help():
     """Помощь по генерации кода"""
     help_text = """
-# 🚀 Генерация кода
 
-## Основные команды:
 ```bash
-# Генерация SQL инъекции
 python -m src.cli_ollama generate generate_exploit --target "SQL injection"
 
-# Анализ уязвимости
 python -m src.cli_ollama generate analyze_vulnerability --target "XSS"
 
-# Сетевое сканирование
 python -m src.cli_ollama generate network_security --target "Port scanning"
 ```
 
-## Параметры:
 - `--think/--no-think` - Включить/выключить Chain-of-Thought
 - `--temp 0.7` - Температура генерации (0.1-1.0)
 - `--max-tokens 1024` - Максимум токенов
 - `--output file.md` - Сохранить в файл
 - `--custom "Создай эксплойт"` - Пользовательский промпт
 
-## Доступные типы задач:
 1. `generate_exploit` - Генерация эксплойтов
 2. `analyze_vulnerability` - Анализ уязвимостей
 3. `reverse_engineering` - Реверс-инжиниринг
@@ -663,23 +656,18 @@ python -m src.cli_ollama generate network_security --target "Port scanning"
 def show_chat_help():
     """Помощь по чату"""
     help_text = """
-# 💬 Интерактивный чат
 
-## Запуск чата:
 ```bash
 python -m src.cli_ollama chat
 ```
 
-## Параметры:
 - `--model deepseek-r1:8b` - Выбор модели
 - `--system "Ты эксперт..."` - Системный промпт
 
-## Команды в чате:
 - Просто пишите вопросы
 - `exit` или `quit` - выход из чата
 - Ctrl+C - принудительный выход
 
-## Примеры вопросов:
 - "Создай эксплойт для SQL инъекции"
 - "Как обойти WAF?"
 - "Анализируй этот код на уязвимости"
@@ -690,31 +678,25 @@ python -m src.cli_ollama chat
 def show_training_help():
     """Помощь по дообучению"""
     help_text = """
-# 🎯 LoRA дообучение
 
-## Требования:
 - GPU с 6+ GB VRAM
 - PyTorch + CUDA
 - Данные в формате JSONL
 
-## Подготовка данных:
 ```json
 {"prompt": "<|system|>\\nТы эксперт...\\n<|user|>\\nСоздай эксплойт\\n<|assistant|>\\n", "completion": "import requests..."}
 ```
 
-## Команда обучения:
 ```bash
 python -m src.cli_ollama train data/my_data.jsonl --epochs 5 --model-name my-model
 ```
 
-## Параметры:
 - `--epochs 3` - Количество эпох
 - `--batch-size 4` - Размер батча
 - `--lr 2e-4` - Скорость обучения
 - `--lora-r 16` - LoRA rank
 - `--output-dir models/my-model` - Папка для сохранения
 
-## После обучения:
 1. Конвертируйте модель в GGUF
 2. Загрузите в Ollama
 3. Используйте для генерации
@@ -724,14 +706,11 @@ python -m src.cli_ollama train data/my_data.jsonl --epochs 5 --model-name my-mod
 def show_prompts_help():
     """Помощь по промптам"""
     help_text = """
-# 📋 Управление промптами
 
-## Просмотр шаблонов:
 ```bash
 python -m src.cli_ollama list-templates
 ```
 
-## Добавление нового шаблона:
 ```bash
 python -m src.cli_ollama add-prompt my_exploit \\
   --desc "Мой эксплойт" \\
@@ -741,11 +720,9 @@ python -m src.cli_ollama add-prompt my_exploit \\
   --set custom
 ```
 
-## Структура файлов промптов:
 - `prompts/default_prompts.json` - Стандартные шаблоны
 - `prompts/custom_prompts.json` - Пользовательские шаблоны
 
-## Переменные в шаблонах:
 - `{vulnerability_type}` - Тип уязвимости
 - `{target_description}` - Описание цели
 - `{network_task}` - Сетевая задача
@@ -757,31 +734,25 @@ python -m src.cli_ollama add-prompt my_exploit \\
 def show_setup_help():
     """Помощь по установке"""
     help_text = """
-# 🔧 Настройка и установка
 
-## Автоматическая установка:
 ```bash
 python install_ollama.py
 ```
 
-## Ручная установка:
 1. Установите Ollama: https://ollama.ai
 2. Запустите: `ollama serve`
 3. Загрузите модель: `ollama pull deepseek-r1:8b-distill-q4_K_M`
 4. Установите зависимости: `pip install -r requirements.txt`
 
-## Проверка установки:
 ```bash
 python -m src.cli_ollama setup
 ```
 
-## Системные требования:
 - Python 3.9+
 - 8+ GB RAM
 - 10+ GB свободного места
 - Для LoRA: GPU с 6+ GB VRAM
 
-## Конфигурация:
 Файл `src/config.py`:
 - `OLLAMA_CONFIG["base_url"]` - URL Ollama
 - `OLLAMA_CONFIG["default_model"]` - Модель по умолчанию
@@ -792,9 +763,7 @@ python -m src.cli_ollama setup
 def show_examples_help():
     """Примеры использования"""
     help_text = """
-# 💡 Примеры использования
 
-## 1. SQL инъекция:
 ```bash
 python -m src.cli_ollama generate generate_exploit \\
   --target "SQL injection in login form" \\
@@ -802,31 +771,26 @@ python -m src.cli_ollama generate generate_exploit \\
   --output sql_exploit.md
 ```
 
-## 2. Анализ кода:
 ```bash
 python -m src.cli_ollama generate analyze_vulnerability \\
   --custom "Проанализируй этот PHP код: <?php echo $_GET['name']; ?>"
 ```
 
-## 3. Сетевое сканирование:
 ```bash
 python -m src.cli_ollama generate network_security \\
   --target "Multi-threaded port scanner" \\
   --think
 ```
 
-## 4. Red Team операция:
 ```bash
 python -m src.cli_ollama generate custom_red_team \\
   --target "Windows Active Directory environment"
 ```
 
-## 5. Интерактивный анализ malware:
 ```bash
 python -m src.cli_ollama chat --system "Ты эксперт по анализу malware"
 ```
 
-## 6. Дообучение на своих данных:
 ```bash
 python -m src.cli_ollama train my_exploits.jsonl \\
   --epochs 5 \\
@@ -838,58 +802,41 @@ python -m src.cli_ollama train my_exploits.jsonl \\
 def show_troubleshooting_help():
     """Устранение проблем"""
     help_text = """
-# 🛠️ Устранение проблем
 
-## Ollama недоступна:
 ```bash
-# Проверьте запущен ли сервис
 ollama serve
 
-# Проверьте порт
 netstat -an | grep 11434
 
-# Перезапустите Ollama
 killall ollama && ollama serve
 ```
 
-## Модель не загружается:
 ```bash
-# Проверьте доступные модели
 ollama list
 
-# Принудительная загрузка
 ollama pull deepseek-r1:8b-distill-q4_K_M
 
-# Альтернативные модели
 ollama pull deepseek-r1:7b-base-q4_K_M
 ```
 
-## Проблемы с LoRA:
 ```bash
-# Установите CUDA версию PyTorch
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 
-# Проверьте GPU
 nvidia-smi
 
-# Уменьшите batch_size
 python -m src.cli_ollama train data.jsonl --batch-size 2
 ```
 
-## Ошибки генерации:
 - Увеличьте `--max-tokens`
 - Уменьшите `--temp`
 - Проверьте системный промпт
 - Используйте `--no-think` для простых задач
 
-## Проблемы с промптами:
 - Проверьте синтаксис JSON
 - Убедитесь в наличии всех полей
 - Перезагрузите шаблоны: `list-templates`
 
-## Логи и отладка:
 ```bash
-# Включите подробные логи
 export PYTHONPATH=.
 python -m src.cli_ollama generate task --verbose
 ```
@@ -1067,25 +1014,25 @@ def _open_in_browser(formatted_result: str, console):
         <style>
             body {{
                 font-family: 'Consolas', 'Monaco', monospace;
-                background: #0d1117;
-                color: #c9d1d9;
+                background:
+                color:
                 padding: 20px;
                 line-height: 1.6;
             }}
             pre {{
-                background: #161b22;
-                border: 1px solid #30363d;
+                background:
+                border: 1px solid
                 padding: 15px;
                 border-radius: 6px;
                 overflow-x: auto;
             }}
             code {{
-                background: #161b22;
+                background:
                 padding: 2px 4px;
                 border-radius: 3px;
-                color: #79c0ff;
+                color:
             }}
-            h1, h2, h3 {{ color: #58a6ff; }}
+            h1, h2, h3 {{ color:
             .container {{ max-width: 1200px; margin: 0 auto; }}
         </style>
     </head>

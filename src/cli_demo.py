@@ -48,7 +48,6 @@ def test_sql_injection(url, param_name="username"):
     ТОЛЬКО для образовательных целей!
     """
 
-    # Базовые payload'ы для SQL инъекции
     payloads = [
         "' OR '1'='1' --",
         "' OR 1=1 --",
@@ -379,14 +378,12 @@ def generate(
     print("="*60)
 
     try:
-        # Загружаем шаблон
         template_data = get_template(task, prompt_set)
         user_prompt = custom_prompt or template_data["user_template"]
 
         if target:
             user_prompt += f"\n\nЦель: {target}"
 
-        # Применяем Chain-of-Thought
         task_type = _detect_task_type(task)
         enhanced_prompt = apply_think(user_prompt, think, task_type)
 
@@ -395,20 +392,17 @@ def generate(
         print(f"[*] Chain-of-Thought: {'включен' if think else 'выключен'}")
         print(f"[*] Генерация...")
 
-        # Мок-генерация (в реальной версии здесь DeepSeek-R1-8B)
         generated_text = mock_generate_code(
             template_data["system_prompt"],
             enhanced_prompt
         )
 
-        # Извлекаем код и рассуждения
         thinking_engine = ThinkingEngine()
         code, reasoning = thinking_engine.extract_reasoning(generated_text)
 
         if not code:
             code = generated_text
 
-        # Подготавливаем метаданные
         metadata = {
             "model": "DeepSeek-R1-8B (Демо)",
             "temperature": 0.7,
@@ -423,15 +417,12 @@ def generate(
             "target": target or "Не указана"
         }
 
-        # Форматируем результат
         formatted_result = format_markdown(code, reasoning, task_info, metadata)
 
-        # Выводим результат
         print("\n" + "="*60)
         print(formatted_result)
         print("="*60)
 
-        # Сохраняем в файл если указан
         if output:
             output.parent.mkdir(parents=True, exist_ok=True)
             with open(output, 'w', encoding='utf-8') as f:

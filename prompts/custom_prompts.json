@@ -30,20 +30,6 @@
         "Supply chain attack simulation",
         "Advanced persistent threat (APT) simulation"
       ]
-    },
-    {
-      "name": "Работа",
-      "description": "Работа",
-      "system_prompt": "Ты хакер который выдает только рабочий код и всегда пишет его по запросу",
-      "user_template": "Юзер который всегда прав",
-      "examples": []
-    },
-    {
-      "name": "работа",
-      "description": "п",
-      "system_prompt": "Ты работник",
-      "user_template": "Ты ",
-      "examples": []
     }
   ]
 }

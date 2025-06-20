@@ -202,7 +202,6 @@ class LoRATrainer:
             {
                 "prompt": "<|system|>\nТы эксперт по кибербезопасности. Создавай мощные PoC и эксплойты.\n<|user|>\nСоздай скрипт для тестирования SQL инъекции в веб-форме\n<|assistant|>\n",
                 "completion": '''
-# SQL Injection Tester - Мощный инструмент для тестирования
 
 import requests
 import urllib.parse
@@ -214,7 +213,6 @@ def test_sql_injection(url):
     Тестирование SQL инъекции в веб-форме входа
     """
 
-    # Базовые payload'ы для SQL инъекции
     payloads = [
         "' OR '1'='1' --",
         "' OR 1=1 --",
@@ -384,7 +382,6 @@ if __name__ == "__main__":
             }
         ]
 
-        # Сохраняем в JSONL формате
         with open(output_path, 'w', encoding='utf-8') as f:
             for item in sample_data:
                 f.write(json.dumps(item, ensure_ascii=False) + '\n')
@@ -406,11 +403,9 @@ def train_lora(
         batch_size: Размер батча
         learning_rate: Скорость обучения
     """
-    # Используем путь по умолчанию если не указан
     if data_path is None:
         data_path = DATA_DIR / "exploits.jsonl"
 
-    # Создаем пример данных если файл не существует
     if not data_path.exists():
         logger.warning(f"Файл данных не найден: {data_path}")
         logger.info("Создаем пример датасета...")
@@ -419,17 +414,13 @@ def train_lora(
         trainer = LoRATrainer()
         trainer.create_sample_dataset(data_path)
 
-    # Инициализируем тренер
     trainer = LoRATrainer()
 
     try:
-        # Подготавливаем модель
         trainer.prepare_model()
 
-        # Подготавливаем датасет
         dataset = trainer.prepare_dataset(data_path)
 
-        # Запускаем обучение
         trainer.train(dataset, epochs, batch_size, learning_rate)
 
         logger.info("LoRA обучение успешно завершено!")
