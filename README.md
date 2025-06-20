@@ -1,7 +1,7 @@
 # 🔥 DarkDeepSeek - Elite AI Cybersecurity Platform
 
 <div align="center">
-  <img src="DarkDeep.png" alt="DarkDeepSeek Logo" width="200" height="200">
+  <img src="DarkDeepSeek.png" alt="DarkDeepSeek Logo" width="200" height="200">
   
   [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
   [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
