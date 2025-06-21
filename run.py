@@ -1380,7 +1380,7 @@ class RetroTerminal:
             return
 
         task_name = selected_task["name"]
-        self.console.print(f"\n[{self.info_color}]🔄 Запуск генерации...[/]")
+        self.console.print(f"\n[{self.info_color}]Starting generation...[/]")
 
         try:
             cmd = [
@@ -1399,11 +1399,11 @@ class RetroTerminal:
 
     def _get_xss_target(self) -> str:
         """English docstring"""
-        self.console.print(f"\n[{self.accent_color}]🔥 XSS ЭКСПЛОЙТ ГЕНЕРАТОР[/]")
+        self.console.print(f"\n[{self.accent_color}]XSS EXPLOIT GENERATOR[/]")
         self.console.print()
 
         xss_table = Table(
-            title="Выберите тип XSS атаки",
+            title="Select XSS Attack Type",
             border_style=self.accent_color,
             show_header=True
         )
@@ -1413,12 +1413,12 @@ class RetroTerminal:
         xss_table.add_column("Description", style=self.secondary_color, width=40)
 
         xss_types = [
-            ("1", "🎯 Reflected XSS", "Отраженные XSS через URL параметры"),
-            ("2", "💾 Stored XSS", "Хранимые XSS в базе данных"),
-            ("3", "🔄 DOM-based XSS", "XSS через манипуляции DOM"),
-            ("4", "🛡️ WAF Bypass", "Обход веб-файрволов и фильтров"),
-            ("5", "⚡ Polyglot XSS", "Универсальные многоязычные пейлоады"),
-            ("6", "🎪 Custom XSS", "Пользовательский сценарий атаки")
+            ("1", "Reflected XSS", "Reflected XSS through URL parameters"),
+            ("2", "Stored XSS", "Stored XSS in database"),
+            ("3", "DOM-based XSS", "XSS through DOM manipulation"),
+            ("4", "WAF Bypass", "Web firewall and filter bypass"),
+            ("5", "Polyglot XSS", "Universal multilingual payloads"),
+            ("6", "Custom XSS", "Custom attack scenario")
         ]
 
         for num, xss_type, desc in xss_types:
@@ -1428,42 +1428,42 @@ class RetroTerminal:
         self.console.print()
 
         xss_choice = Prompt.ask(
-            f"[{self.accent_color}]Выберите тип XSS[/]",
+            f"[{self.accent_color}]Select XSS type[/]",
             choices=["1", "2", "3", "4", "5", "6"],
             default="1"
         )
 
         details = {}
 
-        self.console.print(f"\n[{self.secondary_color}]📋 Дополнительные параметры:[/]")
+        self.console.print(f"\n[{self.secondary_color}]Additional parameters:[/]")
 
         if xss_choice in ["1", "2", "3"]:
-            details["url"] = Prompt.ask(f"[{self.amber_color}]🌐 URL цели (опционально)[/]", default="example.com")
-            details["param"] = Prompt.ask(f"[{self.amber_color}]📝 Уязвимый параметр[/]", default="search")
+            details["url"] = Prompt.ask(f"[{self.amber_color}]Target URL (optional)[/]", default="example.com")
+            details["param"] = Prompt.ask(f"[{self.amber_color}]Vulnerable parameter[/]", default="search")
 
         if xss_choice == "4":
-            details["waf"] = Prompt.ask(f"[{self.amber_color}]🛡️ Type WAF/фильтра[/]", default="ModSecurity")
-            details["blocked"] = Prompt.ask(f"[{self.amber_color}]❌ Заблокированные символы[/]", default="<script>")
+            details["waf"] = Prompt.ask(f"[{self.amber_color}]WAF/Filter type[/]", default="ModSecurity")
+            details["blocked"] = Prompt.ask(f"[{self.amber_color}]Blocked characters[/]", default="<script>")
 
         if xss_choice == "5":
-            details["context"] = Prompt.ask(f"[{self.amber_color}]🎯 Контекст инъекции[/]",
+            details["context"] = Prompt.ask(f"[{self.amber_color}]Injection context[/]",
                                           choices=["HTML", "JavaScript", "CSS", "Attribute"],
                                           default="HTML")
 
-        self.console.print(f"\n[{self.amber_color}]🎯 Выберите цель атаки:[/]")
+        self.console.print(f"\n[{self.amber_color}]Select attack goal:[/]")
         attack_goals = [
-            "1. Cookie Stealing - кража cookies и сессий",
-            "2. Session Hijack - захват пользовательской сессии",
-            "3. Defacement - ofменение содержимого страницы",
-            "4. Phishing - создание поддельной формы входа",
-            "5. Keylogger - запись нажатий клавиш",
-            "6. Custom - пользовательская логика"
+            "1. Cookie Stealing - steal cookies and sessions",
+            "2. Session Hijack - hijack user sessions",
+            "3. Defacement - modify page content",
+            "4. Phishing - create fake login forms",
+            "5. Keylogger - record keystrokes",
+            "6. Custom - custom logic"
         ]
 
         for goal in attack_goals:
             self.console.print(f"[{self.secondary_color}]{goal}[/]")
 
-        goal_choice = Prompt.ask(f"[{self.amber_color}]Выберите цель (1-6)[/]",
+        goal_choice = Prompt.ask(f"[{self.amber_color}]Select goal (1-6)[/]",
                                choices=["1", "2", "3", "4", "5", "6"],
                                default="1")
 
@@ -1477,19 +1477,19 @@ class RetroTerminal:
         }
         details["target_action"] = goal_map[goal_choice]
 
-        self.console.print(f"\n[{self.amber_color}]🌐 Выберите целевой браузер:[/]")
+        self.console.print(f"\n[{self.amber_color}]Select target browser:[/]")
         browsers = [
             "1. Chrome - Google Chrome",
             "2. Firefox - Mozilla Firefox",
             "3. Safari - Apple Safari",
             "4. Edge - Microsoft Edge",
-            "5. All - Все браузеры"
+            "5. All - All browsers"
         ]
 
         for browser in browsers:
             self.console.print(f"[{self.secondary_color}]{browser}[/]")
 
-        browser_choice = Prompt.ask(f"[{self.amber_color}]Выберите браузер (1-5)[/]",
+        browser_choice = Prompt.ask(f"[{self.amber_color}]Select browser (1-5)[/]",
                                   choices=["1", "2", "3", "4", "5"],
                                   default="5")
 
@@ -1503,49 +1503,49 @@ class RetroTerminal:
         details["browser"] = browser_map[browser_choice]
 
         xss_descriptions = {
-            "1": f"Reflected XSS атака для параметра '{details.get('param', 'search')}' на {details.get('url', 'целевом сайте')}",
-            "2": f"Stored XSS через параметр '{details.get('param', 'comment')}' с постоянным сохранением",
-            "3": f"DOM-based XSS через JavaScript обработку параметра '{details.get('param', 'hash')}'",
-            "4": f"XSS с обходом {details.get('waf', 'WAF')}, заблокированы: {details.get('blocked', 'стандартные теги')}",
-            "5": f"Polyglot XSS пейлоад для контекста {details.get('context', 'HTML')} работающий во всех браузерах",
-            "6": "Кастомный XSS эксплойт по техническим требованиям"
+            "1": f"Reflected XSS attack for parameter '{details.get('param', 'search')}' on {details.get('url', 'target site')}",
+            "2": f"Stored XSS through parameter '{details.get('param', 'comment')}' with persistent storage",
+            "3": f"DOM-based XSS through JavaScript processing of parameter '{details.get('param', 'hash')}'",
+            "4": f"XSS with {details.get('waf', 'WAF')} bypass, blocked: {details.get('blocked', 'standard tags')}",
+            "5": f"Polyglot XSS payload for {details.get('context', 'HTML')} context working in all browsers",
+            "6": "Custom XSS exploit according to technical requirements"
         }
 
         base_request = xss_descriptions[xss_choice]
 
         action_descriptions = {
-            "Cookie Stealing": "для кражи cookies и сессий",
-            "Session Hijack": "для захвата пользовательской сессии",
-            "Defacement": "для ofменения содержимого страницы",
-            "Phishing": "для создания поддельной формы входа",
-            "Keylogger": "для записи нажатий клавиш",
-            "Custom": "с пользовательской логикой"
+            "Cookie Stealing": "for stealing cookies and sessions",
+            "Session Hijack": "for user session hijacking",
+            "Defacement": "for page content modification",
+            "Phishing": "for creating fake login form",
+            "Keylogger": "for keystroke recording",
+            "Custom": "with custom logic"
         }
 
         target_action = details.get("target_action", "Cookie Stealing")
         full_request = f"{base_request} {action_descriptions.get(target_action, '')}"
 
         if details.get("browser") != "All":
-            full_request += f" для браузера {details['browser']}"
+            full_request += f" for {details['browser']} browser"
 
-        additional = Prompt.ask(f"\n[{self.accent_color}]💡 Дополнительные требования (опционально)[/]", default="")
+        additional = Prompt.ask(f"\n[{self.accent_color}]Additional requirements (optional)[/]", default="")
 
         if additional:
             full_request += f". {additional}"
 
-        self.console.print(f"\n[{self.info_color}]🎯 Генерирую: {full_request}[/]")
+        self.console.print(f"\n[{self.info_color}]Generating: {full_request}[/]")
 
         return full_request
 
     def _get_custom_generation(self) -> str:
         """English docstring"""
-        self.console.print(f"\n[{self.accent_color}]💭 СВОБОДНАЯ ГЕНЕРАЦИЯ[/]")
-        self.console.print(f"[{self.secondary_color}]Опишите что вы хотите создать в свободной форме[/]")
-        self.console.print(f"[{self.amber_color}]Можете писать как в обычном чате с AI[/]")
+        self.console.print(f"\n[{self.accent_color}]FREE GENERATION[/]")
+        self.console.print(f"[{self.secondary_color}]Describe what you want to create in free form[/]")
+        self.console.print(f"[{self.amber_color}]You can write as in regular AI chat[/]")
         self.console.print()
 
         lines = []
-        self.console.print(f"[{self.info_color}]Введите ваш запрос (пустая строка для завершения):[/]")
+        self.console.print(f"[{self.info_color}]Enter your request (empty line to finish):[/]")
 
         while True:
             line = input(f"[{len(lines)+1}] ")
@@ -1554,7 +1554,7 @@ class RetroTerminal:
             lines.append(line)
 
         if not lines:
-            return "Создай мощный инструмент кибербезопасности"
+            return "Create a powerful cybersecurity tool"
 
         return " ".join(lines)
 
@@ -1582,18 +1582,18 @@ class RetroTerminal:
 
             if command in cmd_map:
                 try:
-                    self.console.print(f"[{self.accent_color}]> Выполнение команды...[/]")
+                    self.console.print(f"[{self.accent_color}]> Executing command...[/]")
                     if callable(cmd_map[command]):
                         cmd_map[command]()
                     else:
                         subprocess.run(cmd_map[command])
                 except KeyboardInterrupt:
-                    self.console.print(f"\n[{self.info_color}]> Command прервана пользователем[/]")
+                    self.console.print(f"\n[{self.info_color}]> Command interrupted by user[/]")
                 except Exception as e:
-                    self.console.print(f"[{self.error_color}]> Ошибка: {e}[/]")
+                    self.console.print(f"[{self.error_color}]> Error: {e}[/]")
 
                 if not callable(cmd_map.get(command)):
-                    input(f"\n[{self.info_color}]Нажмите Enter для возврата в меню...[/]")
+                    input(f"\n[{self.info_color}]Press Enter to return to menu...[/]")
 
     def manage_templates(self):
         """English docstring"""

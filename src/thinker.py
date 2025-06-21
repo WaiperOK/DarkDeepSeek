@@ -57,7 +57,7 @@ class ThinkingEngine:
 
         enhanced_template += "\n\nВыполните задачу пошагово, объясняя каждый шаг своих рассуждений."
 
-        logger.info(f"Применен Chain-of-Thought для задачи типа: {task_type}")
+        logger.info(f"Applied Chain-of-Thought for task type: {task_type}")
         return enhanced_template
 
     def _get_thinking_prompt(self, task_type: str) -> str:

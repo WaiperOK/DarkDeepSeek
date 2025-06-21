@@ -22,8 +22,8 @@ class OllamaGenerator:
         self.model_name = model_name
         self.session = requests.Session()
 
-        logger.info(f"Инициалofация Ollama генератора: {self.base_url}")
-        logger.info(f"Модель: {self.model_name}")
+        logger.info(f"Ollama generator initialization: {self.base_url}")
+        logger.info(f"Model: {self.model_name}")
 
     def check_connection(self) -> bool:
         """English docstring"""
@@ -31,7 +31,7 @@ class OllamaGenerator:
             response = self.session.get(f"{self.base_url}/api/tags")
             return response.status_code == 200
         except Exception as e:
-            logger.error(f"Ошибка подключения к Ollama: {e}")
+            logger.error(f"Ollama connection error: {e}")
             return False
 
     def list_models(self) -> List[Dict[str, Any]]:
@@ -42,7 +42,7 @@ class OllamaGenerator:
                 return response.json().get("models", [])
             return []
         except Exception as e:
-            logger.error(f"Ошибка получения списка моделей: {e}")
+            logger.error(f"Error getting models list: {e}")
             return []
 
     def pull_model(self, model_name: str = None) -> bool:
@@ -71,7 +71,7 @@ class OllamaGenerator:
             return False
 
         except Exception as e:
-            logger.error(f"Ошибка загрузки модели: {e}")
+            logger.error(f"Model loading error: {e}")
             return False
 
     def generate_code(self,
@@ -112,7 +112,7 @@ class OllamaGenerator:
             request_data["system"] = system_prompt
 
         try:
-            logger.info(f"Генерация с параметрами: {options}")
+            logger.info(f"Generation with parameters: {options}")
 
             response = self.session.post(
                 f"{self.base_url}/api/generate",
@@ -128,7 +128,7 @@ class OllamaGenerator:
                     response_text = result.get("response", "")
                     return self._clean_thinking_blocks(response_text)
             else:
-                logger.error(f"Ошибка API: {response.status_code} - {response.text}")
+                logger.error(f"API error: {response.status_code} - {response.text}")
                 return ""
 
         except Exception as e:
@@ -175,7 +175,7 @@ class OllamaGenerator:
             return self._clean_thinking_blocks(full_response)
 
         except Exception as e:
-            logger.error(f"Ошибка обработки потока: {e}")
+            logger.error(f"Stream processing error: {e}")
             return self._clean_thinking_blocks(full_response)
 
     def generate_with_system_prompt(self,

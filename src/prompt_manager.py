@@ -48,19 +48,19 @@ class PromptManager:
                     data = json.load(f)
 
                 if not isinstance(data, dict) or 'templates' not in data:
-                    logger.error(f"Неверная структура файла {json_file}")
+                    logger.error(f"Invalid file structure {json_file}")
                     continue
 
                 for template_data in data['templates']:
                     try:
                         template = PromptTemplate(**template_data)
                         self._templates_cache[template.name] = template
-                        logger.info(f"Загружен шаблон: {template.name}")
+                        logger.info(f"Template loaded: {template.name}")
                     except Exception as e:
-                        logger.error(f"Ошибка загрузки шаблона {template_data.get('name', 'unknown')}: {e}")
+                        logger.error(f"Error loading template {template_data.get('name', 'unknown')}: {e}")
 
             except Exception as e:
-                logger.error(f"Ошибка чтения файла {json_file}: {e}")
+                logger.error(f"Error reading file {json_file}: {e}")
 
     def get_template(self, task_name: str, prompt_set: str = "default") -> Optional[PromptTemplate]:
         """

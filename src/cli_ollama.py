@@ -112,9 +112,9 @@ def generate(
     init_components()
 
     console.print(Panel.fit(
-        f"[bold green]🚀 Генерация: {task}[/bold green]\n"
-        f"[cyan]Модель:[/cyan] {model}\n"
-        f"[cyan]Цель:[/cyan] {target or 'Не указана'}\n"
+        f"[bold green]Generation: {task}[/bold green]\n"
+        f"[cyan]Model:[/cyan] {model}\n"
+        f"[cyan]Target:[/cyan] {target or 'Not specified'}\n"
         f"[cyan]Chain-of-Thought:[/cyan] {'✅' if think else '❌'}",
         border_style="green"
     ))
@@ -149,7 +149,7 @@ def generate(
             TextColumn("[progress.description]{task.description}"),
             console=console
         ) as progress:
-            gen_task = progress.add_task("Генерация кода...", total=None)
+            gen_task = progress.add_task("Generating code...", total=None)
 
             response = generator.generate_code(
                 prompt=user_prompt,
@@ -159,10 +159,10 @@ def generate(
                 stream=stream
             )
 
-            progress.update(gen_task, description="✅ Код сгенерирован")
+            progress.update(gen_task, description="✅ Code generated")
 
         if not response:
-            console.print("[red]❌ Ошибка генерации![/red]")
+            console.print("[red]❌ Generation error![/red]")
             return
 
         if think:
@@ -209,10 +209,10 @@ def generate(
                 reasoning=reasoning if show_reasoning else None,
                 metadata=metadata
             )
-            formatted_result += "\n\n
-            formatted_result += "- Код протестирован и готов к использованию\n"
-            formatted_result += "- Убедитесь в наличии необходимых зависимостей\n"
-            formatted_result += "- Используйте в соответствии с этическими принципами\n"
+            formatted_result += "\n\n"
+            formatted_result += "- Code tested and ready to use\n"
+            formatted_result += "- Make sure all required dependencies are installed\n"
+            formatted_result += "- Use in accordance with ethical principles\n"
         else:
             formatted_result = formatter.format_exploit_report(
                 code=code or response,
@@ -230,31 +230,31 @@ def generate(
         from rich.console import Console
         wide_console = Console(width=120, legacy_windows=False)
 
-        console.print(f"[bright_yellow]📋 ПРЕВЬЮ РЕЗУЛЬТАТА (показано {len(preview_lines)} of {len(lines)} строк):[/]")
+        console.print(f"[bright_yellow]RESULT PREVIEW (showing {len(preview_lines)} of {len(lines)} lines):[/]")
         wide_console.print(Markdown(preview))
 
         if len(lines) > 10:
-            console.print(f"[bright_red]⚠️ Result слишком большой для полного отображения![/]")
+            console.print(f"[bright_red]Result too large for full display![/]")
 
         console.print("="*120)
 
-        console.print(f"\n[bright_cyan]📋 ЧТО СДЕЛАТЬ С РЕЗУЛЬТАТОМ?[/]")
+        console.print(f"\n[bright_cyan]WHAT TO DO WITH RESULT?[/]")
 
         actions_table = Table(
             border_style="cyan",
             show_header=True
         )
         actions_table.add_column("№", style="bright_yellow", width=3)
-        actions_table.add_column("Действие", style="bright_green", width=25)
+        actions_table.add_column("Action", style="bright_green", width=25)
         actions_table.add_column("Description", style="bright_white", width=40)
 
         actions = [
-            ("1", "📄 Показать по частям", "Постраничный просмотр в терминале"),
-            ("2", "💾 Save to file", "Сохранить как .md файл"),
-            ("3", "📋 Копировать код", "Извлечь только код без форматирования"),
-            ("4", "🌐 HTML просмотр", "Открыть в браузере как HTML"),
-            ("5", "📂 Открыть папку", "Показать папку с результатами"),
-            ("6", "🔍 Search in text", "Найти конкретную строку")
+            ("1", "Show paginated", "Paginated view in terminal"),
+            ("2", "Save to file", "Save as .md file"),
+            ("3", "Copy code", "Extract only code without formatting"),
+            ("4", "HTML view", "Open in browser as HTML"),
+            ("5", "Open folder", "Show results folder"),
+            ("6", "Search in text", "Find specific line")
         ]
 
         for num, action, desc in actions:
@@ -264,7 +264,7 @@ def generate(
         console.print()
 
         choice = Prompt.ask(
-            "[bright_yellow]Выберите действие (1-6, Enter=показать по частям)[/]",
+            "[bright_yellow]Select action (1-6, Enter=show paginated)[/]",
             choices=["1", "2", "3", "4", "5", "6", ""],
             default="1",
             show_choices=False
@@ -286,8 +286,8 @@ def generate(
         console.print("="*120)
 
     except Exception as e:
-        console.print(f"[red]❌ Ошибка: {e}[/red]")
-        logger.error(f"Ошибка генерации: {e}")
+        console.print(f"[red]❌ Error: {e}[/red]")
+        logger.error(f"Generation error: {e}")
 
 @app.command()
 def chat(
@@ -913,7 +913,7 @@ def _save_to_file(formatted_result: str, console):
         filepath.write_text(formatted_result, encoding='utf-8')
         console.print(f"[green]✅ Result сохранен: {filepath}[/green]")
 
-        if Confirm.ask("[bright_yellow]Открыть папку с файлом?[/]", default=False):
+        if Confirm.ask("[bright_yellow]Open file folder?[/]", default=False):
             _open_output_folder(console)
 
     except Exception as e:
@@ -1054,7 +1054,7 @@ def _open_in_browser(formatted_result: str, console):
             temp_path = f.name
 
         webbrowser.open(f'file://{temp_path}')
-        console.print(f"[green]✅ Result открыт в браузере: {temp_path}[/green]")
+        console.print(f"[green]✅ Result opened in browser: {temp_path}[/green]")
 
     except Exception as e:
         console.print(f"[red]❌ Ошибка открытия в браузере: {e}[/red]")

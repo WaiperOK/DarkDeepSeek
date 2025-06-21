@@ -38,7 +38,7 @@ class MarkdownFormatter:
 
         if reasoning:
             short_reasoning = self._shorten_reasoning(reasoning)
-            sections.append("
+            sections.append("## 🧠 Reasoning")
             sections.append(short_reasoning)
             sections.append("")
 
@@ -49,16 +49,16 @@ class MarkdownFormatter:
             sections.append("")
 
         if extracted_code:
-            sections.append("
-            sections.append("```javascript")
-            formatted_code = self._aggressive_code_formatting(extracted_code)
-            sections.append(formatted_code)
+            language = self._detect_language(extracted_code)
+            sections.append("## 💻 Code")
+            sections.append(f"```{language}")
+            sections.append(extracted_code.strip())
             sections.append("```")
             sections.append("")
 
-        sections.append("
-        sections.append("Данный код предназначен исключительно для образовательных целей и тестирования безопасности.")
-        sections.append("Использование в злонамеренных целях запрещено.")
+        sections.append("## ⚠️ Disclaimer")
+        sections.append("This code is intended exclusively for educational purposes and security testing.")
+        sections.append("Use for malicious purposes is prohibited.")
 
         return "\n".join(sections)
 
@@ -175,36 +175,36 @@ class MarkdownFormatter:
     def _create_header(self, task_type: str = "exploit", metadata: Optional[Dict[str, Any]] = None) -> str:
         """English docstring"""
         task_names = {
-            "exploit": "🚀 Генерация Эксплойта",
-            "analyze": "🔍 Аналof Уязвимости",
-            "reverse": "🛠️ Реверс-Инжиниринг",
-            "network": "🌐 Сетевая Безопасность",
-            "web": "🌍 Веб-Безопасность"
+            "exploit": "EXPLOIT GENERATION",
+            "analyze": "VULNERABILITY ANALYSIS", 
+            "reverse": "REVERSE ENGINEERING",
+            "network": "NETWORK SECURITY",
+            "web": "WEB SECURITY"
         }
 
-        title = task_names.get(task_type, "🔧 Кибербезопасность")
+        title = task_names.get(task_type, "CYBERSECURITY")
 
         if metadata and metadata.get("target"):
             title += f" - {metadata['target']}"
 
         header = f"# {title}\n"
-        header += f"*Сгенерировано: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*"
+        header += f"*Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}*"
 
         return header
 
     def _create_metadata_section(self, metadata: Dict[str, Any]) -> str:
         """English docstring"""
-        section = "
+        section = "## 📊 Metadata\n"
 
         info_items = []
         if metadata.get("model"):
-            info_items.append(f"**Модель:** {metadata['model']}")
+            info_items.append(f"**Model:** {metadata['model']}")
         if metadata.get("template"):
-            info_items.append(f"**Шаблон:** {metadata['template']}")
+            info_items.append(f"**Template:** {metadata['template']}")
         if metadata.get("target"):
-            info_items.append(f"**Цель:** {metadata['target']}")
+            info_items.append(f"**Target:** {metadata['target']}")
         if metadata.get("temperature"):
-            info_items.append(f"**Температура:** {metadata['temperature']}")
+            info_items.append(f"**Temperature:** {metadata['temperature']}")
 
         section += "\n".join(info_items)
         return section
@@ -212,7 +212,7 @@ class MarkdownFormatter:
     def _create_code_section(self, code: str) -> str:
         """English docstring"""
         if not code.strip():
-            return "
+            return ""
 
 
         extracted_code = None
@@ -280,13 +280,13 @@ class MarkdownFormatter:
             if potential_code:
                 extracted_code = '\n'.join(potential_code)
             else:
-                return "
+                return ""
 
         extracted_code = extracted_code.strip()
 
         language = self._detect_language(extracted_code)
 
-        section = "
+        section = "## 💻 Code\n"
         section += f"```{language}\n{extracted_code}\n```\n"
 
         return section
@@ -397,7 +397,7 @@ class MarkdownFormatter:
 
     def _create_reasoning_section(self, reasoning: str) -> str:
         """English docstring"""
-        section = "
+        section = "## 🧠 Reasoning\n"
 
         formatted_reasoning = self._format_reasoning_text(reasoning)
         section += formatted_reasoning
@@ -422,6 +422,25 @@ class MarkdownFormatter:
 
         return '\n'.join(formatted_lines)
 
+    def _remove_code_blocks(self, text: str) -> str:
+        """Remove code blocks from text and return only non-code content"""
+        import re
+        
+        # Remove triple backtick code blocks
+        text = re.sub(r'```[\s\S]*?```', '', text)
+        
+        # Remove single backtick inline code
+        text = re.sub(r'`[^`]*`', '', text)
+        
+        # Remove lines that look like code
+        lines = text.split('\n')
+        non_code_lines = []
+        
+        for line in lines:
+            if not self._is_code_line(line.strip()):
+                non_code_lines.append(line)
+        
+        return '\n'.join(non_code_lines)
 
 def format_markdown(code: str,
                    task_type: str = "exploit",
@@ -448,7 +467,7 @@ def create_simple_code_block(code: str, language: str = "python") -> str:
 
 def add_security_comment(code: str) -> str:
     """English docstring"""
-    comment = "
+    comment = "# WARNING: This code is for educational purposes only\n"
     return comment + code
 
 if __name__ == "__main__":
