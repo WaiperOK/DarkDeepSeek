@@ -243,20 +243,15 @@ def main():
 
     print("\n🚀 ПРИМЕРЫ ИСПОЛЬЗОВАНИЯ:")
     print("-" * 30)
-    print("
-    print("python -m src.cli_ollama generate generate_exploit --target 'SQL injection в форме входа'")
-    print()
-    print("
-    print("python -m src.cli_ollama generate analyze_vulnerability --target 'XSS в комментариях'")
-    print()
-    print("
-    print("python -m src.cli_ollama chat")
-    print()
-    print("
-    print("python -m src.cli_ollama list-templates")
-    print()
-    print("
-    print("python -m src.cli_ollama list-models")
+    examples = [
+        "python -m src.cli_ollama generate generate_exploit --target 'SQL injection в форме входа'",
+        "python -m src.cli_ollama generate analyze_vulnerability --target 'XSS в комментариях'",
+        "python -m src.cli_ollama chat",
+        "python -m src.cli_ollama list-templates",
+        "python -m src.cli_ollama list-models",
+    ]
+    for cmd in examples:
+        print(cmd)
 
     print("\n📚 ДОКУМЕНТАЦИЯ:")
     print("README.md - полная документация")
