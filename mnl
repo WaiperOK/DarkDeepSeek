@@ -1,0 +1,74 @@
+[{
+	"resource": "/C:/Users/abiga/killem_3_1.py",
+	"owner": "Pylance2",
+	"severity": 8,
+	"message": "Invalid character \"\\u22da\" in token",
+	"source": "Pylance",
+	"startLineNumber": 1,
+	"startColumn": 1,
+	"endLineNumber": 1,
+	"endColumn": 10,
+	"origin": "extHost1"
+},{
+	"resource": "/C:/Users/abiga/killem_3_1.py",
+	"owner": "Pylance2",
+	"severity": 8,
+	"message": "Expected module name",
+	"source": "Pylance",
+	"startLineNumber": 11,
+	"startColumn": 13,
+	"endLineNumber": 12,
+	"endColumn": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/C:/Users/abiga/killem_3_1.py",
+	"owner": "Pylance2",
+	"severity": 8,
+	"message": "Expected \"import\"",
+	"source": "Pylance",
+	"startLineNumber": 11,
+	"startColumn": 13,
+	"endLineNumber": 12,
+	"endColumn": 1,
+	"origin": "extHost1"
+},{
+	"resource": "/C:/Users/abiga/killem_3_1.py",
+	"owner": "Pylance2",
+	"code": {
+		"value": "reportMissingImports",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pylance-release/blob/main/docs/diagnostics/reportMissingImports.md",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 4,
+	"message": "Import \"Crypto.Cipher\" could not be resolved",
+	"source": "Pylance",
+	"startLineNumber": 10,
+	"startColumn": 6,
+	"endLineNumber": 10,
+	"endColumn": 19,
+	"origin": "extHost1"
+},{
+	"resource": "/C:/Users/abiga/killem_3_1.py",
+	"owner": "Pylance2",
+	"code": {
+		"value": "reportMissingImports",
+		"target": {
+			"$mid": 1,
+			"path": "/microsoft/pylance-release/blob/main/docs/diagnostics/reportMissingImports.md",
+			"scheme": "https",
+			"authority": "github.com"
+		}
+	},
+	"severity": 4,
+	"message": "Import \"Crypto\" could not be resolved",
+	"source": "Pylance",
+	"startLineNumber": 11,
+	"startColumn": 6,
+	"endLineNumber": 11,
+	"endColumn": 13,
+	"origin": "extHost1"
+}]
